@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>登录账号</title>
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <!-- <link rel="stylesheet" href="../../css/public.css"> -->
+</head>
+<!-- background="/layui/font/grom.jpeg" -->
+<body  class="layui-bg-black" background="/layui/font/3.jpeg" >
+
+    <div style="width:100%;height:100px;text-align:center;margin: 80px auto;">
+        <h2 style="font-size: 50px;color:#06bff7;">登录</h2>
+           
+    <form class="layui-form layui-inline" action=""  >
+
+        <div class="layui-form-item" style="font-size:auto;color:#01AAED;">
+          <label class="layui-form-label">账号：</label>
+          <div class="layui-input-block">
+            <input style="width:500px;" type="text" name="account" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-form-item" style="font-size:auto;color:#01AAED;">
+          <label class="layui-form-label">密码：</label>
+          <div class="layui-input-inline">
+            <input  style="width:500px;" type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+          </div>
+          <!-- <div class="layui-form-mid layui-word-aux">请输入至少8个字母和数据组成的密码</div> -->
+        </div>
+        <div class="layui-form-item"  style="font-size:auto;color:#01AAED;" >
+         
+
+     
+       
+        <div class="layui-form-item" style="width:500px;">
+          <div class="layui-input-block">
+            <label class="layui-btn layui-btn-normal" for=""><a href="/login" style="font-size: auto;color:#f5f9fa;" >登录</a></label>
+            <button type="reset" class="layui-btn layui-btn-warm">重置</button>
+            <label class="layui-btn layui-btn-normal" for=""><a href="/register" style="font-size: auto;color:#f5f9fa;" >注册新账号  </a></label>
+          </div>
+        </div>
+      </form>
+      </div>
+       
+      <!-- 没有引用这个容易报错 -->
+      <script src="/layui/layui.js" charset="utf-8"></script>
+      <script>
+      //注册页面
+      layui.use(['form','laydate','layer'], function(){
+        //var laydate = layui.laydate;
+        var form = layui.form;   //要添加这个才能提交成功post数据
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        
+        //监听提交
+        form.on('submit(registeruser)', function(obj){
+          //layer.msg(JSON.stringify(data.field));
+          $.post("http://127.0.0.1:8087/registeruser",obj.field,function(d){
+            if(d.code!=200){
+                layer.msg("注册成功",{time:900},function(){  //{time:1000设置延时关闭时间拼给一个funcntion函数
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    window.parent.location.reload();//刷新父页面
+                    parent.layer.close(index);//关闭弹出层
+                });
+               
+            }else{
+                layer.msg("添加失败")
+            }
+            
+
+        })
+          return false;
+        });
+      });
+      </script>
+
+
+
+</body>
+</html>

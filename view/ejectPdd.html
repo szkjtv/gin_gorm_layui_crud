@@ -1,0 +1,158 @@
+<!-- 这是弹出添加拼多多数据层 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>弹出添加拼多多数据层</title>
+  <link rel="stylesheet" href="./layui/css/layui.css">
+</head>
+<body>
+
+<div class="layui-container" style="margin-top: 5px;">
+    <!-- action="/add" method="post" -->
+    <form class="layui-form" >
+        <!-- <div class="layui-form-item">
+          <label class="layui-form-label">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</label>
+          <div class="layui-input-block">
+            <input  width="40px" type="text" name="name" required  lay-verify="required" placeholder="请输入收件人姓名" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+  
+  
+        <div class="layui-form-item">
+          <label class="layui-form-label">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</label>
+          <div class="layui-input-block">
+            <input  width="40px" type="number"  name="mobile" required  lay-verify="required" placeholder="请输入收件人电话" autocomplete="off" class="layui-input">
+          </div>
+        </div> -->
+
+
+       
+
+        <!-- <div class="layui-form-item">
+          <label class="layui-form-label">上传图片:</label>
+          <div class="layui-input-block">
+            <button type="button" class="layui-btn" name="file" id="test1">
+              <i class="layui-icon">&#xe67c;</i>上传文件
+            </button>
+          </div>
+        </div> -->
+  
+        <div class="layui-form-item">
+          <label class="layui-form-label">订单编号:</label>
+          <div class="layui-input-block">
+            <input  width="40px" type="text" name="oder" required   placeholder="请输入订单编号" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+     
+
+
+        <div class="layui-form-item">
+          <label class="layui-form-label">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址:</label>
+          <div class="layui-input-block">
+            <input  width="40px" type="text" name="address" required  lay-verify="required" placeholder="请输入收件人地址" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">商品编码:</label>
+            <div class="layui-input-block">
+              <input  width="40px" type="text" name="comcode" required  lay-verify="required" placeholder="商品编码" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">快递:</label>
+            <div class="layui-input-block">
+              <input  width="40px" type="text" id="courier" name="courier" required   placeholder="快递单号" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格:</label>
+            <div class="layui-input-block">
+              <input  width="40px" type="number" id="price" value="" name="price" required   placeholder="请输入出售价格" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">成&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本:</label>
+            <div class="layui-input-block">
+              <input  width="40px" type="text" value="" id="cost" name="cost" required   placeholder="请输入成本价格" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">利&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;润:</label>
+            <div class="layui-input-block">
+              <input  width="40px" type="text" id="profit" name="profit" required   placeholder="订单利润" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+  
+      
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注:</label>
+                <div class="layui-input-block">
+                    <textarea name="remarks" placeholder="备注该笔订单的信息" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="addPdd" >提交数据</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+          </div>
+        </div>
+      </form>
+</div>
+
+
+<script src="/layui/layui.js" charset="utf-8"></script>
+
+<script>
+
+
+    layui.use(['form','laydate','layer'], function(){
+        //var laydate = layui.laydate;
+        var form = layui.form;   //要添加这个才能提交成功post数据
+        var $ = layui.jquery;
+        var layer = layui.layer;
+       // var upload = layui.upload;  上传文件的 暂时不需要
+
+        //执行实例
+       // var uploadInst = upload.render({
+          //elem: '#test1' //绑定元素
+         // ,url: '/pddadddata/' //上传接口
+         // ,done: function(res){
+            //上传完毕回调
+         // }
+       //   ,error: function(){
+            //请求异常回调
+        //  }
+       // });
+
+        //弹出层提交表单完成了
+        form.on('submit(addPdd)',function(obj){
+            $.post("http://127.0.0.1:8087/pddadddata",obj.field,function(d){
+                if(d.code!=200){
+                    layer.msg("添加成功",{time:300},function(){  //{time:1000设置延时关闭时间拼给一个funcntion函数
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        window.parent.location.reload();//刷新父页面
+                        parent.layer.close(index);//关闭弹出层
+                    });
+                   
+                }else{
+                    layer.msg("添加失败")
+                }
+                
+
+            })
+            return false;  //要加上这个返回为假弹出关闭才会生效
+            })
+            
+    }) //这个是use的括号
+</script>
+</body>
+</html>

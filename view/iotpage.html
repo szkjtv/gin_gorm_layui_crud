@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<!-- 获取物联卡客户数据显示页面 -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>iot流量卡数据页</title>
+  
+  <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="/layui/css/layui.css">
+  <script src="/layui/layui.js" charset="utf-8"></script>
+  
+  <!-- <link rel="stylesheet" href="/layui/build/layui.css" media="all">
+  <link rel="stylesheet" href="/build/layui.css" media="all"> -->
+  <!-- <link rel="stylesheet" href="/layui/css/layui.css" tppabs="https://www.layui.site/layui/dist/css/layui.css"  media="all"> -->
+</head>
+<body>
+
+
+
+
+
+
+<div class="layui-layout layui-layout-admin ">
+  <div class="layui-header">
+    <div class="layui-logo layui-hide-xs layui-bg-black"  style="font-size: 23px; color: #fa3904"><i class="layui-icon layui-icon-website" style="font-size: 30px; color: #0587f9;"></i>物联卡管理系统</div>
+    <!-- 头部区域（可配合layui 已有的水平导航） -->
+    <ul class="layui-nav layui-layout-left">
+      <!-- 移动端显示 -->
+      <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-header-event="menuLeft">
+        <i class="layui-icon layui-icon-spread-left"></i>
+      </li>
+      
+      <li class="layui-nav-item layui-hide-xs"><a href="/">首页</a></li>
+      <li class="layui-nav-item layui-hide-xs"><a href="/">拼多多客户信息</a></li>
+      <li class="layui-nav-item layui-hide-xs"><a href="/iotcard">物联卡客户信息</a></li>
+      <li class="layui-nav-item">
+        <a href="javascript:;">下拉管理 </a>
+        <dl class="layui-nav-child">
+          <dd><a href="">拼多多客户信息</a></dd>
+          <dd><a href="/iotcard">物联卡客户信息</a></dd>
+        </dl>
+      </li>
+    </ul>
+
+
+   
+  </div>
+  
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree" lay-filter="test">
+        <li class="layui-nav-item layui-nav-itemed">
+          <a class="" href="javascript:;">管理</a>
+          <dl class="layui-nav-child">
+            <!-- <dd><a href="/getpage">新增</a></dd> -->
+            <!-- <dd><a href="/getpageadd">查询</a></dd> -->
+            <dd><a href="/"><i class="layui-icon layui-icon-dollar" style="font-size: 15  px; color: #0bf73a;"></i>拼多多客户信息</a></dd>
+            <dd><a href="/iotcard"><i class="layui-icon layui-icon-website" style="font-size: 15px; color: #0587f9;"></i>物联卡客户信息</a></dd>
+          </dl>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="layui-body">
+    <!-- 内容主体区域 -->
+
+    <!-- 工具集 -->
+<div class="my-btn-box">
+  <span class="fl">
+      <!-- <a class="layui-btn layui-btn-danger radius btn-delect" id="btn-delete-all">批量添加</a> -->
+      <!-- <a class="layui-btn btn-add btn-default" id="btn-get">采集设备总数</a> -->
+      <!-- <a class="layui-btn layui-btn-normal" id="addid">添加数据</a> -->
+      
+      <a type="button" class="layui-btn layui-btn-radius layui-btn-normal" id="test6230">添加数据 </a>
+      <!-- <i class="layui-icon layui-icon-add-circle" style="font-size: 30px; color: #0784fa;" id="test6230"></i> -->
+      
+      <!-- <button id="test6230">测试按钮</button> -->
+  </span>
+
+</div >
+<!--&lt;!&ndash; 表格 &ndash;&gt;-->
+<script type="text/javascript" src="/layui/layui.js"></script>
+<!-- <script type="text/javascript" src="../js/index.js"></script> -->
+<!-- <table class="layui-hide" id="test" lay-filter="test"></table> -->
+
+
+<div class="layuimini-container">
+  <div class="layuimini-main"> 
+     
+   
+
+    <table id="demo" lay-filter="deltest"> 
+      <!--注意此处table标签里的id-->
+  <!-- <table class="layui-table layui-hide" id="test" lay-filter="test"></table> -->
+  </div>
+</div>
+
+ 
+
+<div >
+<!-- 原来的数据表格 -->
+<!-- <table id="demo" lay-filter="deltest">  -->
+
+</table> 
+</div>
+
+    
+<!-- 上面是layui数据表格获取内容 -->
+
+
+     <script src="/layui/layui.js" charset="utf-8"></script>
+    <!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 --> 
+   
+    <script type="text/html" id="barOption">
+      <!-- <a class="layui-btn layui-btn-mini" lay-event="detail">查看</a> -->
+      <a class="layui-btn layui-btn-mini layui-btn-normal layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+      <a class="layui-btn layui-btn-mini layui-btn-danger layui-btn layui-btn-xs" lay-event="del">删除</a>
+
+  </script>
+
+
+
+
+
+    <script>
+      layui.use(['table','layer'], function(){
+        var table = layui.table;
+        var form = layui.form;
+        var $ = layui.jquery;
+        var layer = layui.layer;
+
+        //绑定当前数据
+        table.on('tool(deltest)', function(obj){
+         // console.log(obj.field);
+          console.log("obj:=>",obj)
+          //console.log("data=",obj.data);
+          //console.log("obj=",obj.event);
+          //console.log("obj=",obj.tr);
+          if(obj.event=='del'){
+            //删除
+            layer.confirm("确认删除",{icon:3,title:"确定要删除吗？"},function(index){
+             // $.getJSON("http://127.0.0.1:8080/delete/"+obj.data.ID,function(d){
+                $.getJSON("http://127.0.0.1:8087/deleiot/"+obj.data.ID,function(d){
+                  dataType:"json";
+                  if(d.Status == 200){
+                    layer.msg("删除失败");
+                  }else{
+                    
+                    obj.del();  //删除当前行
+                    layer.msg("删除成功");
+                    window.parent.location.reload();//刷新父页面
+                    parent.layer.close(index);//关闭弹出层
+                    layer.cols(index);//关闭弹出层
+                  }
+                })
+            });
+          }else if(obj.event=='edit'){
+             //更新
+             //console.log("更新")
+            //弹出更新页面
+            layer.open({
+              
+              type:2,
+              title:'修改数据',
+              content: '/upIiotpage',  //获取弹出更新拼多多层
+              area: [ '600px',  '550px'],
+              closeBtn:2,
+              //shade:[0.8,'#d9ead3'], //遮罩
+              end:function(){
+                //console.log("弹出层关闭了。。。")
+               //ayer.close(add);
+                table.reload("tableid")  //这是定义数据表格重载刷新
+              },
+              success:function(layero,index){   //这个是函数是让数据回显在修改的编辑框内
+                var body = layer.getChildFrame('body',index);
+                //body.find("#name").val(obj.data.name);
+               // body.find("#mobile").val(obj.data.mobile);
+                body.find("#address").val(obj.data.address);
+                body.find("#courier").val(obj.data.courier);
+                body.find("#number").val(obj.data.number);
+                body.find("#remarks").val(obj.data.remarks);
+                //body.find("#id").val(obj.data.ID);
+                body.find("#id").val(obj.data.ID);
+              }
+
+            });
+        
+
+
+          }else{
+            console.log("没有定义其他方法")
+          }
+        });
+
+     
+
+        //给添加数据绑定事件 和 弹出添加层
+        $("#test6230").click(function(){  //这是点击按钮弹出添加数据页面的在按钮上附上相应的ID即可
+            // layer.msg("点击事件");
+            //alert("===添加数据页");
+            //点击一个按钮添加弹出框添加数据
+            layer.open({
+              type:2,
+              title:'添加数据',
+              content: '/getaddpage',   //获取静态弹出层路径 拼多多的
+              area: [ '600px',  '550px'],
+              closeBtn:2,
+              //shade:[0.8,'#d9ead3'], //遮罩
+              end:function(){
+                //console.log("弹出层关闭了。。。")
+               // layer.close(add);
+                table.reload("tableid")  //这是定义数据表格重载刷新
+              }
+
+            });
+        }); 
+
+        //第一个实例
+        table.render({
+          elem: '#demo'
+          ,height: 550
+          ,id:'tableid' //这是定义数据表格重载刷新id
+          ,url: 'http://127.0.0.1:8087/iotquery' //数据接口
+          ,id: 'dataCheck'
+          ,page: true //开启分页
+          ,limit:10
+          ,limits: [8, 10, 20, 50, 200,500,1000,2000]
+          ,skin: 'row'
+          ,toolbar: 'default'//开启工具栏
+          ,tatalRow : true
+          ,request: {
+            pageName: 'page' //页码的参数名称，默认：page
+            ,limitName: 'limit' //每页数据量的参数名，默认：limit
+          }
+          //,data:tableContent
+          //前端使用这 -->
+          ,parseData: function(res){ //res 即为原始返回的数据
+            //console.log(res)
+            var result;
+              //console.log("aaa="+this);
+              //console.log("bbb"+JSON.stringify(res));
+             // console.log("curr==="+this.page.curr);
+              if(this.page.curr){
+                //若为第二页 则curr为2 页面显示的数据就是从res.data集合数组里的 （2-1）*limit（10）=10 到 limit（10）*2=20的数据
+                result = res.slice(this.limit*(this.page.curr-1),this.limit*this.page.curr);
+                }
+                else{
+                    // 一开始就是第一页 则就是 显示的数据就是从res.data集合数组里的0到limit（10）中
+                    result = res.slice(0,this.limit);
+                }
+            return {
+              "code": 0, //解析接口状态
+              "msg": '', //解析提示文本
+              "count":res.length, //解析数据长度查询总数据
+              "data": result//res //解析数据列表
+            };
+          }
+          ,done: function (res, curr, count){
+          }
+
+          ,cols: [[ //数据库表头
+              //{type: 'checkbox', fixed: 'left',style:"border:0.5px solid #D3D3D3",style:"border:0.5px solid #D3D3D3" },
+              {field: 'ID', title: 'ID',align:'center', width:60,  fixed: 'left',totalRowText : '合计',style:"border:0.5px solid #D3D3D3"}
+              //,{field: 'name', title: '姓名', width:72,sort: true,align:'center',style:"border:0.5px solid #D3D3D3;font-size:6px;"}
+              //,{field: 'mobile', title: '电话', width:104,sort: true,align:'center',style:"border:0.5px solid #D3D3D3;font-size:2px;"}
+              ,{field: 'address', edit:'text',title: '收货信息地址', width:580,align:'center',style:"border:0.5px solid #D3D3D3;font-size:2px;text-align:left"}
+              ,{field: 'number', edit:'text',title: '卡号', width:97,align:'center',style:"border:0.5px solid #D3D3D3;font-size:2px;text-align:left"}
+              ,{field: 'courier',edit:'text', title: '快递单号', width:131,align:'center',style:"border:0.5px solid #D3D3D3;font-size:2px;"}
+              ,{field: 'remarks', edit:'text',title: '备注', width:104,align:'center',style:"border:0.5px solid #D3D3D3;font-size:2px;"}
+              
+              ,{field: "CreatedAt",edit:'text', title: '添加时间',templet:function(d){
+                if (d.CreatedAt &&  d.CreatedAt !== '' && d.CreatedAt !== null){
+                  return layui.util.toDateString(d.CreatedAt, 'yyyy年MM月dd日HH时:mm分:ss秒 ')//HH时:mm分:ss秒
+                }else{
+                  
+                }
+            }, width:120,sort: true,align:'center',style:"border:0.5px solid #D3D3D3;font-size:2px;"}  //这是创建时间
+
+            ,{field: "UpdatedAt", edit:'text',title: '更新时间',templet:function(d){
+              if (d.UpdatedAt &&  d.UpdatedAt !== '' && d.UpdatedAt !== null){
+                return layui.util.toDateString(d.UpdatedAt, 'yyyy年MM月dd日HH时:mm分')
+              }else{
+                
+              }
+          }, width:135,sort: true,align:'center',style:"border:0.5px solid #D3D3D3;font-size:2px;"}  //这是更新时间
+              ,{fixed: 'right',title:"操作", width: 116 ,height:50, align:'left', toolbar: '#barOption',style:"border:0.5px solid #D3D3D3"}
+              //,{fixed: 'right',title:'添加数据', width: 400,height:100, align:'center', toolbar: '#adddata'}
+          ]]
+        });
+
+
+      
+    
+              
+
+
+});  //user的括号
+</script>
+</body>
+</html>
