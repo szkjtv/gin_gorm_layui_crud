@@ -107,3 +107,50 @@ func Updatapdd(c *gin.Context) {
 func Updatepage(c *gin.Context) {
 	c.HTML(200, "updatepdd.html", nil)
 }
+
+// 根据订单编号查询数据
+// 通过备注信息进行模糊搜索
+func OderQ(c *gin.Context) {
+	db := mysql.Dbinit()
+	var pdddata []model.PddData
+	//id := c.Param("id")
+	// Name := c.PostForm("name")       //姓名
+	// Mobile := c.PostForm("mobile")   //电话
+	//Address := c.Query("address") //地址
+	//Number := c.Query("number") //出售的卡号信息
+	//Courier := c.Query("courier") //快递
+	// Weixin := c.PostForm("weixin")   //客户的微信
+	Oder := c.Query("oder") //备注
+	// 传一个参数完全匹配查询出来的
+	//db.Where("number =  ?", Number).Debug().Find(&iot)
+	// 实际模糊搜索功能
+	db.Where("oder LIKE  ?", Oder+"%").Find(&pdddata)
+	// LIKE
+	// db.Where("name LIKE ?", "%jin%").Find(&users)
+
+	c.JSON(200, pdddata)
+
+}
+
+//通过地址搜索
+func AddQ(c *gin.Context) {
+	db := mysql.Dbinit()
+	var pdddata []model.PddData
+	//id := c.Param("id")
+	// Name := c.PostForm("name")       //姓名
+	// Mobile := c.PostForm("mobile")   //电话
+	//Address := c.Query("address") //地址
+	//Number := c.Query("number") //出售的卡号信息
+	//Courier := c.Query("courier") //快递
+	// Weixin := c.PostForm("weixin")   //客户的微信
+	Address := c.Query("address") //备注
+	// 传一个参数完全匹配查询出来的
+	//db.Where("number =  ?", Number).Debug().Find(&iot)
+	// 实际模糊搜索功能
+	db.Where("address LIKE  ?", Address+"%").Find(&pdddata)
+	// LIKE
+	// db.Where("name LIKE ?", "%jin%").Find(&users)
+
+	c.JSON(200, pdddata)
+
+}

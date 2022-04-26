@@ -1,8 +1,6 @@
 package controllor
 
 import (
-	"net/http"
-
 	"example.com/m/v2/model"
 	"example.com/m/v2/mysql"
 	"github.com/gin-gonic/gin"
@@ -60,7 +58,7 @@ func UpIot(c *gin.Context) {
 	// db.Model(&model.Article{}).Where(id).Update(&model.Article{Title: title, Content: content})
 	// db.Model(&user).Where(id).Updates(User{Name: Name, Mobile: Mobile, Add: Add, Bz: Bz})
 	c.JSON(200, "修改物联卡信息成功")
-	c.Redirect(http.StatusMovedPermanently, "/iotcard") //重定向
+	//c.Redirect(http.StatusMovedPermanently, "/iotcard") //重定向
 
 	// c.JSON(200, "提交成功")
 }
@@ -94,4 +92,46 @@ func DeleIot(c *gin.Context) {
 // 获取弹出层的修改页面 物联卡客户信息
 func UpIotPage(c *gin.Context) {
 	c.HTML(200, "UpIotPage.html", nil)
+}
+
+// 根据号码字段来查询信息
+func GetAddree(c *gin.Context) {
+	db := mysql.Dbinit()
+	var iot []model.IotCard
+	Number := c.Query("number") //出售的卡号信息
+	// 传一个参数完全匹配查询出来的
+	//db.Where("number =  ?", Number).Debug().Find(&iot)
+	// 实际模糊搜索功能
+	db.Where("number LIKE  ?", Number+"%").Find(&iot)
+	// LIKE
+	// db.Where("name LIKE ?", "%jin%").Find(&users)
+	//db.Where(&model.IotCard{Address: Address, Number: Number, Courier: Courier, Weixin: Weixin, Remarks: Remarks}).Find(&iot)
+	c.JSON(200, iot)
+	//c.Redirect(http.StatusMovedPermanently, "/iotcard") //重定向
+}
+
+// 通过地址模糊查询Get请求
+func Addree(c *gin.Context) {
+	db := mysql.Dbinit()
+	var iot []model.IotCard
+	Address := c.Query("address") //地址
+	// 实现模糊搜索功能
+	db.Where("address LIKE  ?", Address+"%").Find(&iot)
+	// LIKE
+	// db.Where("name LIKE ?", "%jin%").Find(&users)
+	c.JSON(200, iot)
+}
+
+// 通过备注信息进行模糊搜索
+func Remarks(c *gin.Context) {
+	db := mysql.Dbinit()
+	var iot []model.IotCard
+	Remarks := c.Query("remarks") //备注
+	// 传一个参数完全匹配查询出来的
+	//db.Where("number =  ?", Number).Debug().Find(&iot)
+	// 实际模糊搜索功能
+	//Number := c.Query("number")
+	db.Where("remarks LIKE  ?", Remarks+"%").Find(&iot) //这个是可以查出来的
+	c.JSON(200, iot)
+
 }

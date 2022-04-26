@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>商品编码成本</title>
+  
+  <!-- <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="/layui/css/layui.css"> -->
+
+  <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+  <!-- <link rel="stylesheet" href="/layui/css/layui.css"> -->
+  <script src="../static/layui/layui.js" charset="utf-8"></script>
+ 
+
+  
+  <!-- <link rel="stylesheet" href="/layui/build/layui.css" media="all">
+  <link rel="stylesheet" href="/build/layui.css" media="all"> -->
+  <!-- <link rel="stylesheet" href="/layui/css/layui.css" tppabs="https://www.layui.site/layui/dist/css/layui.css"  media="all"> -->
+</head>
+<body>
+<div class="layui-layout layui-layout-admin "  >
+  <div class="layui-header" >
+    <div class="layui-logo layui-hide-xs layui-bg-black" style="font-size: 23px; color: #fa3904"><i class="layui-icon layui-icon-fire" style="font-size: 30px; color: #0bf73a;"></i>商品管理</div>
+    <!-- 头部区域（可配合layui 已有的水平导航） -->
+    <ul class="layui-nav layui-layout-left" style="font-size: 30px; color: #0bf73a;" >
+      <!-- 移动端显示 -->
+      <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-header-event="menuLeft">
+        <i class="layui-icon layui-icon-spread-left"></i>
+      </li>
+      
+      <li class="layui-nav-item layui-hide-xs"><a href="/">首页</a></li>
+      <li class="layui-nav-item layui-hide-xs"><a href="/">拼多多客户信息</a></li>
+      <li class="layui-nav-item layui-hide-xs"><a href="/iotcard">物联卡客户信息</a></li>
+      <li class="layui-nav-item layui-hide-xs"><a href="/ommindex">炊大皇铁锅</a></li>
+      <li class="layui-nav-item" >
+        <a href="javascript:;">下拉管理 </a>
+        <dl class="layui-nav-child">
+          <dd><a href="">拼多多客户信息</a></dd>
+          <dd><a href="/iotcard">物联卡客户信息</a></dd>
+          <dd><a href="/ommindex">炊大皇铁锅</a></dd>
+        </dl>
+      </li>
+    </ul>
+   
+  </div>
+  
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree" lay-filter="test">
+        <li class="layui-nav-item layui-nav-itemed">
+          <a class="" href="javascript:;">管理</a>
+          <dl class="layui-nav-child">
+            <!-- <dd><a href="/getpage">新增</a></dd> -->
+            <!-- <dd><a href="/getpageadd">查询</a></dd> -->
+            <dd><a href="/"><i class="layui-icon layui-icon-dollar" style="font-size: 15  px; color: #0bf73a;"></i>拼多多客户信息</a></dd>
+            <dd><a href="/iotcard"><i class="layui-icon layui-icon-website" style="font-size: 15px; color: #0587f9;"></i>物联卡客户信息</a></dd>
+            <dd><a href="/ommindex"><i class="layui-icon layui-icon-fire" style="font-size: 15px; color: #0587f9;"></i>炊大皇锅型号</a></dd>
+          </dl>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="layui-body">
+    <!-- 内容主体区域 -->
+
+    
+<!-- 搜索框的内容 -->
+<blockquote class="layui-elem-quote" style="height: 25px;">
+  <!--搜索维度  -->
+   <div class="layui-form">
+      <div class="layui-form-item">
+          <label class="layui-form-label">商品编码:</label>
+          <div class="layui-input-inline">
+              <input type="text" id='spcode' name="spcode" lay-verify="required" placeholder="请输入商品编码查询" autocomplete="true" class="layui-input">
+          </div>
+
+          <!-- <label class="layui-form-label">地址:</label>
+          <div class="layui-input-inline">
+              <input type="text" id='address' name="address" lay-verify="required" placeholder="后端没有写" autocomplete="true" class="layui-input">
+          </div>
+
+          <label class="layui-form-label">备注信息:</label>
+          <div class="layui-input-inline">
+              <input type="text" id='remarks' name="remarks" lay-verify="required" placeholder="后端没有写" autocomplete="true" class="layui-input">
+          </div>
+          <!--lay-event="search" id="search-btn"  这个是重要的参数  -->
+          <button class="layui-btn layui-btn-normal layui-btn-radius" lay-event="search" id="search-btn"  data-type="reload"><i class="layui-icon">&#xe615;</i>查询</button>
+          <button class="layui-btn layui-btn-normal" id="test6230"  data-type="add">添加</button>
+      </div> -->
+  </div>   
+  </blockquote>
+<!-- 搜索框的内容 -->
+
+
+
+
+    <!-- 工具集 -->
+    <div class="my-btn-box">
+      <span class="fl">
+          <!-- <a class="layui-btn layui-btn-radius layui-btn-danger" id="btn-delete-all">批量添加</a> -->
+          <!-- <a class="layui-btn btn-add btn-default" id="btn-get">采集设备总数</a> -->
+          <!-- <a class="layui-btn layui-btn-normal" id="addid">添加数据</a> -->
+          <!-- <a type="button" class="layui-btn layui-btn-radius layui-btn-normal" id="test6230">添加数据</a> -->
+          <!-- <button id="test6230">测试按钮</button> -->
+      </span>
+    </div >
+
+    
+<!--&lt;!&ndash; 表格 &ndash;&gt;-->
+<script type="text/javascript" src="/layui/layui.js"></script>
+<!-- <script type="text/javascript" src="../js/index.js"></script> -->
+<!-- <table class="layui-hide" id="test" lay-filter="test"></table> -->
+
+
+<div class="layuimini-container">
+  <div class="layuimini-main"> 
+    
+
+    <!-- 获取数据渲染的层重要的 -->
+    <!-- <table class="layui-table layui-hide" id="demo" lay-filter="deltest" ></table> -->
+ 
+</div>  
+</div>
+
+<!-- G:\编程语言前后案列\gin_gorm_layui_crud\imagess\img\2022\4\25\1650817374-89ef4797550becb3bd7e39351a651b48.jpeg -->
+<div>
+<!-- 原来的数据表格 -->
+ <img src="../static/fm/img/2022/4/24/225.png"  style="height: 200px;width:200px;max-width:20%"/>
+<img src="../imagess/img/2022/4/26/1650930537.png" style="height: 200px;width:200px;max-width:20%"/>
+<img src="..\imagess\img\2022\4\25\1650899296-微信截图_20220417211336.png" style="height: 200px;width:200px;max-width:20%" /> 
+<!-- 这下面这个也可以显示出来图片 -->
+<!-- <img src="../static/fm/img/2022/4/24/1650779138-头层牛皮1111.png"  style="height: 200px;width:200px;max-width:20%" /> -->
+
+<table id="demo" lay-filter="deltest" style="height: 0px;width:100px;max-width:0%"  ></table> 
+<!-- <img src="../imagess/img/2022/4/24/1650808692-5G流量卡.jpg"  style="height: 0px;width:100px;max-width:0%"> -->
+<!-- <H1 style="height: 0px;width:100px;max-width:0%"><img src="/imagess/2022/25/1650817374-89ef4797550becb3bd7e39351a651b48.jpeg"></H1> -->
+<!-- <img src="http://127.0.0.1:8087./../static/fm/img/2022/4/24/1650779138-%E5%A4%B4%E5%B1%82%E7%89%9B%E7%9A%AE1111.png"/> -->
+
+<!-- <script type="text/css">
+  .layui-table-cell{
+    height: 100px;
+width: 100px;
+max-width: 100%;
+}
+</script> -->
+
+</div>
+
+    
+<!-- 上面是layui数据表格获取内容 -->
+     <script src="/layui/layui.js" charset="utf-8"></script>
+    <!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 --> 
+   
+    <script type="text/html" id="barOption">
+      <!-- <a class="layui-btn layui-btn-mini" lay-event="detail">查看</a> -->
+      <a class="layui-btn layui-btn-mini layui-btn-normal layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+      <a class="layui-btn layui-btn-mini layui-btn-danger layui-btn layui-btn-xs" lay-event="del">删除</a>
+
+  </script>
+
+
+
+    <script>
+      layui.use(['table','layer','form','element',], function(){
+        var table = layui.table;  //表格
+        var form = layui.form;  //表单
+        var $ = layui.jquery;  
+        var layer = layui.layer;//弹出层
+
+    
+
+
+        //绑定当前数据执行删除操作
+        table.on('tool(deltest)', function(obj){
+         // console.log(obj.field);
+          //console.log("obj:=>",obj)
+          //console.log("data=",obj.data);
+          //console.log("obj=",obj.event);
+          //console.log("obj=",obj.tr);
+          if(obj.event=='del'){
+            //删除
+            layer.confirm("确认删除",{icon:3,title:"确定要删除吗？"},function(index){
+             // $.getJSON("http://127.0.0.1:8080/delete/"+obj.data.ID,function(d){
+                $.getJSON("http://127.0.0.1:8087/delec/"+obj.data.ID,function(d){
+                  dataType:"json";
+                  if(d.Status == 200){
+                    layer.msg("删除失败");
+                  }else{
+                    
+                    obj.del();  //删除当前行
+                    layer.msg("删除成功");
+                    window.parent.location.reload();//刷新父页面
+                    parent.layer.close(index);//关闭弹出层
+                    layer.cols(index);//关闭弹出层
+                  }
+                })
+            });
+          }else if(obj.event=='edit'){
+             //更新
+             //console.log("更新")
+            //弹出更新页面
+            layer.open({
+              type:2,
+              title:'修改数据',
+              content: '/getPagespname',  //获取弹出更新拼多多层
+              area: [ '750px',  '650px'],
+              closeBtn:2,
+              //shade:[0.8,'#d9ead3'], //遮罩
+              end:function(){
+                //console.log("弹出层关闭了。。。")
+               //layer.close(add);
+                //table.reload("tableid")  //这是定义数据表格重载刷新
+              },
+              success:function(layero,index){   //这个是函数是让数据回显在修改的编辑框内
+                var body = layer.getChildFrame('body',index);
+                body.find("#spname").val(obj.data.Spname);
+                body.find("#spcode").val(obj.data.Spcode);
+                body.find("#spconst").val(obj.data.Spconst);
+                body.find("#filepath").val(obj.data.Filepath);
+                body.find("#id").val(obj.data.ID);
+              }
+
+            });
+
+
+
+          }else{
+            console.log("没有定义其他方法")
+          }
+        });
+
+
+       
+
+      
+
+        //给添加数据绑定事件 和 弹出添加层
+        $("#test6230").click(function(){  //这是点击按钮弹出添加数据页面的在按钮上附上相应的ID即可
+            // layer.msg("点击事件");
+            //alert("===添加数据页");
+            //点击一个按钮添加弹出框添加数据
+            layer.open({
+              type:2,
+              title:'读取商品编码添加弹出页',
+              content: '/commadd',   //获取静态弹出层路径 拼多多的
+              area: [ '650px',  '600px'],
+              closeBtn:2,
+              //shade:[0.8,'#d9ead3'], //遮罩
+              end:function(){
+                //console.log("弹出层关闭了。。。")
+               // layer.close(add);
+                table.reload("tableid")  //这是定义数据表格重载刷新
+              }
+
+            });
+        }); 
+
+        //第一个实例
+        table.render({
+          elem: '#demo'
+          ,height: 570
+          //,id:'tableid'
+          ,id:'demo' //这是定义数据表格重载刷新id
+          ,toolbar: '#toolbarDemo'
+          ,url: 'http://127.0.0.1:8087/quercomm' //数据接口
+          //,id: 'dataCheck'
+          ,page: true //开启分页
+          ,limit:10
+          //,limits: [5, 10, 20, 50, 200]
+          ,skin: 'row'
+          //,toolbar: 'default'//开启工具栏  复选框的 + 号 编辑 删除的图图标
+          ,tatalRow : true
+          ,request: {
+            pageName: 'page' //页码的参数名称，默认：page
+            ,limitName: 'limit' //每页数据量的参数名，默认：limit
+          }
+          ,strict:true
+          //,data:tableContent
+          //前端使用这 -->
+          ,parseData: function(res){ //res 即为原始返回的数据
+            //console.log(res)
+            var result;
+              //console.log("aaa="+this);
+              //console.log("bbb"+JSON.stringify(res));
+             // console.log("curr==="+this.page.curr);
+              if(this.page.curr){
+                //若为第二页 则curr为2 页面显示的数据就是从res.data集合数组里的 （2-1）*limit（10）=10 到 limit（10）*2=20的数据
+                result = res.slice(this.limit*(this.page.curr-1),this.limit*this.page.curr);
+                }
+                else{
+                    // 一开始就是第一页 则就是 显示的数据就是从res.data集合数组里的0到limit（10）中
+                    result = res.slice(0,this.limit);
+                }
+            return {
+              "code": 0, //解析接口状态
+              "msg": '', //解析提示文本
+              "count":res.length, //解析数据长度查询总数据
+              "data": result//res //解析数据列表
+            };
+          }
+          ,done: function (res, curr, count){
+          }
+
+      
+          //,totalRow:true  //合计
+          
+        
+          ,cols: [
+              [ //数据库表头  edit:'text'单元格内编辑
+              //{type: 'checkbox', fixed: 'left',style:"border:0.5px solid #D3D3D3",style:"border:0.5px solid #D3D3D3" },
+              //{ type: 'checkbox', },
+              {field: 'ID',  title: 'ID',align:'center', width:50,  fixed: 'left',}
+              //,{field: 'name', title: '姓名', width:80,sort: true,align:'center',style:"border:0.5px solid #D3D3D3;font-size:6px;"}
+              //,{field: 'mobile', title: '电话', width:104,sort: true,align:'center',style:"border:0.5px solid #D3D3D3;font-size:2px;"}
+              ,{field: 'Spname', title: '商品名称',align:'center',style:"border:0.5px solid #D3D3D3;text-align:center;width:auto"}
+              ,{field: 'Spcode', title: '商品编码', align:'center',style:"border:0.5px solid #D3D3D3;text-align:center"}
+              ,{field: 'Spconst', title: '成本价格',align:'center',style:"border:0.5px solid #D3D3D3;text-align:center"}
+              //,{field: 'filepath', title: '商品图片',totalRowText:"合计:",width:100,templet: "#imgtmp",align:'center',style:"border:0.5px solid #D3D3D3;text-align:left;"}
+             // ,{field: 'Filepath', title: '商品图片',totalRowText:"合计:",width:300,templet:'<div><img src="{{.filepath}}"></div>'},
+              , {field: 'Filepath', title: '图片', align: 'center',sort:false,templet:function (d) {return '<div οnclick="photograph(this)"><img src='+d.Filepath+'></div>'}}
+              //,{field: 'Filepath', title: '商品图片',align:'center',templet: function(d) { return '<div onclick="show_img(this)" ><img src="'+d.filepath +'" ' + 'alt="" width="100px" height="200px"></div>'; }},
+              //,{field: 'filepath', title: '商品图片',align:'center',width:300,templet: function(d) { return '<div onclick="show_img(this)" ><img src="'+d.filepath +'" ' + 'alt=""  sstyle="top:0;position:fixed;z-index: 999; text-align: center; height: auto; white-space: normal;"></div>'; }},
+              //,{field: 'filepath', title: '商品图片',align:'center',width:300,templet:'<div><img href=""></div>',style:'height:50px;'},
+              //,{field: 'filepath', title: '商品图片',align:'center',width:300,templet: function(d) { return '<div onclick="show_img(this)" ><img src="'+d.filepath+'" ' + 'alt="" width="50px" height="50px"></a></div>'; }},
+              
+             
+              
+              //,{field: 'CreatedAt', title: '操作时间', width:180,sort: true,}   
+              //,{field: "CreatedAt", title: '添加时间',templet:function(d){
+               // if (d.CreatedAt &&  d.CreatedAt !== '' && d.CreatedAt !== null){
+                //  return layui.util.toDateString(d.CreatedAt, 'yyyy年MM月dd日 HH时:mm分:ss秒')
+               // }else{
+                  
+             //   }
+            //}, width:206,sort: true,align:'center',style:"border:0.5px solid #D3D3D3;"}  //这是创建时间
+
+            ,{field: "UpdatedAt", title: '更新时间',templet:function(d){
+              if (d.UpdatedAt &&  d.UpdatedAt !== '' && d.UpdatedAt !== null){
+                return layui.util.toDateString(d.UpdatedAt, 'yyyy年MM月dd日 HH时:mm分:ss秒')
+              }else{
+                
+              }
+          }, width:206,sort: true,align:'center',style:"border:0.5px solid #D3D3D3;"}  //这是更新时间
+              ,{fixed: 'right',title:"操作", width: 118 ,height:50, align:'center', toolbar: '#barOption',style:"border:0.5px solid #D3D3D3"}
+              //,{fixed: 'right',title:'添加数据', width: 400,height:100, align:'center', toolbar: '#adddata'}
+              ]
+          ],
+          id:'tableid' //这是定义数据表格重载刷新ids
+        });
+
+
+
+
+      //通过商品编码进来搜索数据 
+      $("#search-btn").click(function(){
+        var spcode = $('#spcode').val()
+        var spname = $('#spname').val()
+        //var name = $('#name').val()
+        //var cards = $('#cards').val()
+        //var medicalHistory = $('#medicalHistory').val()
+        table.reload('tableid', {
+            url: 'http://127.0.0.1:8087/spcode'  //后端返回的查询路由
+            ,methods:"get"
+            //,request: {
+            //    pageName: 'page' //页码的参数名称，默认：page
+            //    ,limitName: 'limit' //每页数据量的参数名，默认：limit
+            //}
+            ,where: {
+              spcode: spcode,
+              spname: spname,
+              // account:account,
+                //cards:cards,
+              //// medicalHistory:medicalHistory
+            }
+            ,page: {
+                curr: 1
+            }
+        });
+      });
+    
+ 
+
+
+});  //user的括号
+</script>
+
+
+<script type="text/html" id="imgTpl">
+  <!-- 是这个{包起来的- }-->
+  <img src="d.Filepath">  
+</script>
+
+<style type="text/css">
+  .layui-table-cell{
+    text-align:center;
+    height: 50px;
+    white-space: normal;
+  }
+  .layui-table img{
+    max-width:200px;
+  }
+</style>
+  
+</body>
+</html>
+
+
+
+
+<!-- 这是点击预览大图的 -->
+//元素加载完成之后点击事件
+$(document).on("click", ".layui-form img[name = 'filepath']", function (e) {
+  console.log(e)
+  layer.open({
+    type: 1,
+    title: "图片预览",
+    closeBtn: 0,
+    shadeClose: true, //点击阴影关闭打开的图片
+    area: ['50%', '50%'],
+    content: "<img width='auto' height='auto' src=" + $(this).context.filepath + " />",
+    //content: "<img width='auto' height='auto' src=" $(this)+e.filepath+" />",
+    //content: '<div><img width='100%', height='auto', name="filepath" src='+content.filepath+'></div>'
+    
+  });
+}) 
+
+
+
+<script>
+  //预览大小根据原图的大小决定弹窗的大小
+  function previewImg(obj) {
+      var img = new Image();
+      img.src = obj.src;
+      var height = img.height + 50; //获取图片高度
+      var width = img.width; //获取图片宽度
+      var imgHtml = "<img src='" + obj.src + "' width='100%' height='100%'/>";
+      //弹出层
+      layer.open({
+          type: 1,
+          shade: 0.8,
+          offset: 'auto',
+          area: [height + 'px', width + 'px'],
+          shadeClose: true,
+          scrollbar: false,
+          title: "用餐图片预览", //不显示标题  
+          content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响  
+          cancel: function () {
+              //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });  
+          }
+      });
+  }
+</script>
+
+
+//预览大小根据原图的大小决定弹窗的大小
+function previewImg(obj) {
+ var img = new Image();
+ img.src = obj.src;
+ var height = img.height + 50; //获取图片高度
+ var width = img.width; //获取图片宽度
+ var imgHtml = "<img src='" + obj.src + "' width='100%' height='100%'/>";
+ //弹出层
+ layer.open({
+     type: 1,
+     shade: 0.8,
+     offset: 'auto',
+     area: [height + 'px', width + 'px'],
+     shadeClose: true,
+     scrollbar: false,
+     title: "用餐图片预览", //不显示标题  
+     content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响  
+     cancel: function () {
+         //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });  
+     }
+ });
+}

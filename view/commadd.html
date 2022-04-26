@@ -1,0 +1,140 @@
+<!-- 这是弹出添加物联卡数据层 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>弹出添加拼多多数据层</title>
+  <link rel="stylesheet" href="../static/layui/css/layui.css">
+</head>
+<body>
+
+<div class="layui-container" style="margin-top: 20px;">
+    <!-- action="/add" method="post" -->
+    <form class="layui-form" id="userForm" lay-filter="deptForm" enctype="mutipart/form-data" >
+        <input type="hidden" id="id" name="id" >  
+
+              <!-- <button   type="button" id="upload"   >
+              <i  class="layui-icon">&#xe67c;</i>上传图片
+                <img id="qrshow" src=""alt=""style="height: 195px;width:280px;border:1px solid rgb(240, 4, 6);">
+              </button> -->
+
+
+              <div class="layui-form-item" >
+                <div class=""  style="height: 210px;width:300px;margin: 0 auto; text-align: center" >
+                <button  style="height: 200px;width:300px;margin: 0 auto; text-align: center" type="button"  id="upload"   >
+                    <!-- <i class="layui-icon">&#xe67c;</i>上传图片 -->
+                    <img class="layui-upload-img  " style="height: 200px;width:300px;margin: 0 auto; text-align: center;background-color:aquamarine" id="demo1">
+                     <i class="layui-icon">&#xe67c;</i>上传图片
+                  </button>
+                </div>
+              </div>
+
+
+
+          
+
+  
+          <div class="layui-form-item">
+            <label class="layui-form-label">商品名称:</label>
+            <div class="layui-input-block">
+              <input  width="40px" type="text" id="spname" name="spname" required  lay-verify="required" placeholder="请输入商品名称" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+  
+          <div class="layui-form-item">
+            <label class="layui-form-label">编&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</label>
+            <div class="layui-input-block">
+              <input  width="40px" type="text" id="spcode" name="spcode" required  placeholder="商品编码" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+  
+      
+  
+          <div class="layui-form-item">
+              <label class="layui-form-label">成&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本:</label>
+              <div class="layui-input-block">
+                <input  width="40px" type="text" id="spconst" name="spconst" required   placeholder="成本价" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+  
+           
+        
+              <!-- <div class="layui-form-item layui-form-text">
+                  <label class="layui-form-label">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注:</label>
+                  <div class="layui-input-block">
+                      <textarea name="remarks" id="remarks" placeholder="备注" class="layui-textarea"></textarea>
+              </div>
+          </div> -->
+
+
+        <div class="layui-form-item">
+          <div class="layui-input-block">
+
+            <button class="layui-btn" lay-submit lay-filter="commpost"  id="commit" >提交数据</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+          </div>
+        </div>
+      </form>
+</div>
+
+
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+
+<script>
+    layui.use(['form','laydate','layer','upload'], function(){
+        //var laydate = layui.laydate;
+        //url:'http://127.0.0.1:8087/commodity',
+        var form = layui.form;   //要添加这个才能提交成功post数据
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var upload = layui.upload;
+
+
+      //嵌套没有成功
+       // form.on("submit(commit)", function (obj) {
+          upload.render({
+            elem: '#upload',
+            url: 'http://127.0.0.1:8087/commodity',
+            auto: false,//选择文件后不自动上传
+            bindAction: '#commit',  //绑定id="commit"在提交按钮上一起和表单数据提交
+        
+              //上传前的回调
+            before: function () {
+              this.data = {
+                spname: $('input[name="spname"]').val(),
+                spcode: $('input[name="spcode"]').val(),
+                spconst: $('input[name="spconst"]').val(),
+              }
+    
+            },
+            //选择文件后的回调
+            choose: function (obj) {
+              obj.preview(function (index, file, result) {
+                $('#demo1').attr('src', result);
+              })  
+            },
+            //操作成功的回调
+            done: function (res, index, upload) {
+              if(res.code == 200){
+               layer.msg("添加商品图片成功",{time:3000000},function(){
+                  var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                  window.parent.location.reload();//刷新父页面
+                  parent.layer.close(index);//关闭弹出层
+                  layer.closeAll(); //关闭所有页
+               })
+              }           
+            },
+            //上传错误回调
+            error: function (index, upload) {
+              layer.alert('上传失败！' + index);
+            }
+          });
+        
+        
+        //})  //这是嵌套的按钮
+            
+    }) //这个是use的括号
+</script>
+</body>
+</html>

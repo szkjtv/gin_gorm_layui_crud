@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>首页显示拼多多数据</title>
   
-  <link rel="stylesheet" href="/layui/css/layui.css" media="all">
-  <link rel="stylesheet" href="/layui/css/layui.css">
-  <script src="/layui/layui.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+  <!-- <link rel="stylesheet" href="/layui/css/layui.css"> -->
+  <script src="../static/layui/layui.js" charset="utf-8"></script>
   
   <!-- <link rel="stylesheet" href="/layui/build/layui.css" media="all">
   <link rel="stylesheet" href="/build/layui.css" media="all"> -->
   <!-- <link rel="stylesheet" href="/layui/css/layui.css" tppabs="https://www.layui.site/layui/dist/css/layui.css"  media="all"> -->
 </head>
 <body>
-<div class="layui-layout layui-layout-admin " style="font-size: 30px; color: #6f706f;" >
-  <div class="layui-header" style="font-size: 30px; color: #6d6d6d;">
-    <div class="layui-logo layui-hide-xs layui-bg-black" style="font-size: 23px; color: #fa3904"><i class="layui-icon layui-icon-dollar" style="font-size: 30px; color: #0bf73a;"></i>拼多多管理系统</div>
+<div class="layui-layout layui-layout-admin "  >
+  <div class="layui-header" >
+    <div class="layui-logo layui-hide-xs layui-bg-red" style="font-size: 23px; color: #fa3904"><i class="layui-icon layui-icon-dollar" style="font-size: 30px; color: #0bf73a;"></i>电商系统</div>
     <!-- 头部区域（可配合layui 已有的水平导航） -->
     <ul class="layui-nav layui-layout-left" style="font-size: 30px; color: #0bf73a;" >
       <!-- 移动端显示 -->
@@ -27,11 +27,13 @@
       <li class="layui-nav-item layui-hide-xs"><a href="/">首页</a></li>
       <li class="layui-nav-item layui-hide-xs"><a href="/">拼多多客户信息</a></li>
       <li class="layui-nav-item layui-hide-xs"><a href="/iotcard">物联卡客户信息</a></li>
+      <li class="layui-nav-item layui-hide-xs "><a href="/ommindex">炊大皇铁锅</a></li>
       <li class="layui-nav-item" >
         <a href="javascript:;">下拉管理 </a>
         <dl class="layui-nav-child">
           <dd><a href="">拼多多客户信息</a></dd>
           <dd><a href="/iotcard">物联卡客户信息</a></dd>
+          <li class="layui-nav-item layui-hide-xs"><a href="/ommindex">炊大皇铁锅</a></li>
         </dl>
       </li>
     </ul>
@@ -49,6 +51,7 @@
             <!-- <dd><a href="/getpageadd">查询</a></dd> -->
             <dd><a href="/"><i class="layui-icon layui-icon-dollar" style="font-size: 15  px; color: #0bf73a;"></i>拼多多客户信息</a></dd>
             <dd><a href="/iotcard"><i class="layui-icon layui-icon-website" style="font-size: 15px; color: #0587f9;"></i>物联卡客户信息</a></dd>
+            <dd><a href="/ommindex"><i class="layui-icon layui-icon-fire" style="font-size: 15px; color: #0587f9;"></i>炊大皇锅型号</a></dd>
           </dl>
         </li>
       </ul>
@@ -58,17 +61,57 @@
   <div class="layui-body">
     <!-- 内容主体区域 -->
 
+    
+<!-- 搜索框的内容 -->
+<blockquote class="layui-elem-quote" style="height: 25px;">
+  <!--搜索维度  -->
+   <div class="layui-form">
+      <div class="layui-form-item">
+          <label class="layui-form-label">订单号查询:</label>
+          <div class="layui-input-inline">
+              <input type="text" id='oder' name="oder" lay-verify="required" placeholder="请输入订单编号" autocomplete="true" class="layui-input">
+          </div>
+
+          <label class="layui-form-label">地址:</label>
+          <div class="layui-input-inline">
+              <input type="text" id='address' name="address" lay-verify="required" placeholder="后端没有写" autocomplete="true" class="layui-input">
+          </div>
+
+          <label class="layui-form-label">备注信息:</label>
+          <div class="layui-input-inline">
+              <input type="text" id='remarks' name="remarks" lay-verify="required" placeholder="后端没有写" autocomplete="true" class="layui-input">
+          </div>
+          <!--lay-event="search" id="search-btn"  这个是重要的参数  -->
+          <button class="layui-btn layui-btn-normal layui-btn-radius" lay-event="search" id="search-btn"  data-type="reload"><i class="layui-icon">&#xe615;</i>查询</button>
+          <button class="layui-btn layui-btn-normal" id="test6230"  data-type="add">添加</button>
+      </div>
+  </div>   
+  </blockquote>
+<!-- 搜索框的内容 -->
+
+
+
+
     <!-- 工具集 -->
     <div class="my-btn-box">
       <span class="fl">
           <!-- <a class="layui-btn layui-btn-radius layui-btn-danger" id="btn-delete-all">批量添加</a> -->
           <!-- <a class="layui-btn btn-add btn-default" id="btn-get">采集设备总数</a> -->
           <!-- <a class="layui-btn layui-btn-normal" id="addid">添加数据</a> -->
-          <a type="button" class="layui-btn layui-btn-radius layui-btn-normal" id="test6230">添加数据</a>
+          <!-- <a type="button" class="layui-btn layui-btn-radius layui-btn-normal" id="test6230">添加数据</a> -->
           <!-- <button id="test6230">测试按钮</button> -->
       </span>
-    
     </div >
+
+<!-- <div>
+  <img src="../imagess/img/2022/4/24/1650808692-5G流量卡.jpg"  sstyle="top:0;position:fixed;z-index: 999; text-align: center; height: auto; white-space: normal;">
+  <H1><img src="/../imagess/2022/25/1650817374-89ef4797550becb3bd7e39351a651b48.jpeg" sstyle="top:0;position:fixed;z-index: 999; text-align: center; height: auto; white-space: normal;"></H1>
+  
+</div> -->
+
+ 
+
+
 <!--&lt;!&ndash; 表格 &ndash;&gt;-->
 <script type="text/javascript" src="/layui/layui.js"></script>
 <!-- <script type="text/javascript" src="../js/index.js"></script> -->
@@ -80,14 +123,14 @@
     
 
     <!-- 获取数据渲染的层重要的 -->
-    <table class="layui-table layui-hide" id="demo" lay-filter="deltest" ></table>
+    <!-- <table class="layui-table layui-hide" id="demo" lay-filter="deltest" ></table> -->
  
 </div>  
 </div>
 
 <div >
 <!-- 原来的数据表格 -->
-<!-- <table id="demo" lay-filter="deltest" ></table>  -->
+<table id="demo" lay-filter="deltest" sstyle="top:0;position:fixed;z-index: 999;" ></table> 
 </div>
 
     
@@ -106,17 +149,12 @@
 
 
 
-    <script>
+<script>
       layui.use(['table','layer','form'], function(){
-        var table = layui.table;
-        var form = layui.form;
-        var $ = layui.jquery;
-        var layer = layui.layer;
-
- 
-
-
-       
+        var table = layui.table;  //表格
+        var form = layui.form;  //表单
+        var $ = layui.jquery;  
+        var layer = layui.layer;//弹出层
 
         //绑定当前数据
         table.on('tool(deltest)', function(obj){
@@ -158,7 +196,7 @@
               end:function(){
                 //console.log("弹出层关闭了。。。")
                //layer.close(add);
-                table.reload("tableid")  //这是定义数据表格重载刷新
+                //table.reload("tableid")  //这是定义数据表格重载刷新
               },
               success:function(layero,index){   //这个是函数是让数据回显在修改的编辑框内
                 var body = layer.getChildFrame('body',index);
@@ -184,7 +222,7 @@
           }
         });
 
-     
+
 
         //给添加数据绑定事件 和 弹出添加层
         $("#test6230").click(function(){  //这是点击按钮弹出添加数据页面的在按钮上附上相应的ID即可
@@ -210,7 +248,7 @@
         //第一个实例
         table.render({
           elem: '#demo'
-          ,height: 550
+          ,height: 570
           //,id:'tableid'
           ,id:'demo' //这是定义数据表格重载刷新id
           ,toolbar: '#toolbarDemo'
@@ -220,12 +258,13 @@
           ,limit:10
           //,limits: [5, 10, 20, 50, 200]
           ,skin: 'row'
-          ,toolbar: 'default'//开启工具栏
+          //,toolbar: 'default'//开启工具栏  复选框的 + 号 编辑 删除的图图标
           ,tatalRow : true
           ,request: {
             pageName: 'page' //页码的参数名称，默认：page
             ,limitName: 'limit' //每页数据量的参数名，默认：limit
           }
+          ,strict:true
           //,data:tableContent
           //前端使用这 -->
           ,parseData: function(res){ //res 即为原始返回的数据
@@ -258,25 +297,25 @@
           ,cols: [[ //数据库表头  edit:'text'单元格内编辑
               //{type: 'checkbox', fixed: 'left',style:"border:0.5px solid #D3D3D3",style:"border:0.5px solid #D3D3D3" },
               //{ type: 'checkbox', },
-              {field: 'ID',  title: 'ID',align:'center', width:50,  fixed: 'left',style:"border:0.5px solid #D3D3D3"}
+              {field: 'ID',  title: 'ID',align:'center', width:50,  fixed: 'left',}
               //,{field: 'name', title: '姓名', width:80,sort: true,align:'center',style:"border:0.5px solid #D3D3D3;font-size:6px;"}
               //,{field: 'mobile', title: '电话', width:104,sort: true,align:'center',style:"border:0.5px solid #D3D3D3;font-size:2px;"}
-              ,{field: 'oder', title: '订单编号', edit:'text',width:174,align:'center',style:"border:0.5px solid #D3D3D3;font-size:6px;text-align:left"}
-              ,{field: 'address', title: '地址', edit:'text',width:500,align:'center',style:"border:0.5px solid #D3D3D3;font-size:2px;text-align:left"}
-              ,{field: 'comcode', title: '商品编码',edit:'text', width:86,align:'center',style:"border:0.5px solid #D3D3D3;font-size:6px;text-align:left"}
-              ,{field: 'courier', title: '快递',totalRowText:"合计:",width:100,align:'center',style:"border:0.5px solid #D3D3D3;font-size:6px;text-align:left;"}
-              ,{field: 'price', title: '售价',edit:'text',width:80,align:'left',totalRow:true,style:"border:0.5px solid #D3D3D3;font-size:6px;"}
-              ,{field: 'cost', title: '成本',edit:'text', width:80,align:'center',totalRow:true,style:"border:0.5px solid #D3D3D3;font-size:6px;"}
-              ,{field: 'profit', title: '利润', width:58,align:'center',totalRow:true,style:"border:0.5px solid #D3D3D3;font-size:6px;"}
-              ,{field: 'remarks', title: '备注',edit:'text', width:180,align:'center',style:"border:0.5px solid #D3D3D3;font-size:6px;text-align:left"}
-              //,{field: 'CreatedAt', title: '操作时间', width:180,sort: true,}
+              ,{field: 'oder', title: '订单编号', edit:'text',width:200,align:'center',style:"border:0.5px solid #D3D3D3;text-align:left"}
+              ,{field: 'address', title: '地址', edit:'text',width:500,align:'center',style:"border:0.5px solid #D3D3D3;text-align:left"}
+              ,{field: 'comcode', title: '商品编码',edit:'text', width:86,align:'center',style:"border:0.5px solid #D3D3D3;text-align:left"}
+              ,{field: 'courier', title: '快递',totalRowText:"合计:",width:100,align:'center',style:"border:0.5px solid #D3D3D3;text-align:left;"}
+              ,{field: 'price', title: '售价',edit:'text',width:80,align:'left',totalRow:true,style:"border:0.5px solid #D3D3D3;" }
+              ,{field: 'cost', title: '成本',edit:'text', width:80,align:'center',totalRow:true,style:"border:0.5px solid #D3D3D3;"}
+              ,{field: 'profit', title: '利润', width:58,align:'center',totalRow:true,style:"border:0.5px solid #D3D3D3;"}
+              ,{field: 'remarks', title: '备注',edit:'text', width:180,align:'center',style:"border:0.5px solid #D3D3D3;text-align:left"}
+              //,{field: 'CreatedAt', title: '操作时间', width:180,sort: true,}   
               ,{field: "CreatedAt", title: '添加时间',templet:function(d){
                 if (d.CreatedAt &&  d.CreatedAt !== '' && d.CreatedAt !== null){
                   return layui.util.toDateString(d.CreatedAt, 'yyyy年MM月dd日 HH时:mm分:ss秒')
                 }else{
                   
                 }
-            }, width:206,sort: true,align:'center',style:"border:0.5px solid #D3D3D3;font-size:2px;"}  //这是创建时间
+            }, width:206,sort: true,align:'center',style:"border:0.5px solid #D3D3D3;"}  //这是创建时间
 
             ,{field: "UpdatedAt", title: '更新时间',templet:function(d){
               if (d.UpdatedAt &&  d.UpdatedAt !== '' && d.UpdatedAt !== null){
@@ -284,18 +323,42 @@
               }else{
                 
               }
-          }, width:206,sort: true,align:'center',style:"border:0.5px solid #D3D3D3;font-size:2px;"}  //这是更新时间
+          }, width:206,sort: true,align:'center',style:"border:0.5px solid #D3D3D3;"}  //这是更新时间
               ,{fixed: 'right',title:"操作", width: 118 ,height:50, align:'center', toolbar: '#barOption',style:"border:0.5px solid #D3D3D3"}
               //,{fixed: 'right',title:'添加数据', width: 400,height:100, align:'center', toolbar: '#adddata'}
-          ]]
+          ]],
+          id:'tableid' //这是定义数据表格重载刷新ids
         });
 
+      //通过订单编号 进行搜索查询
+      $("#search-btn").click(function(){
+        var oder = $('#oder').val()
+        //var name = $('#name').val()
+        //var cards = $('#cards').val()
+        //var medicalHistory = $('#medicalHistory').val()
+        table.reload('tableid', {
+            url: 'http://127.0.0.1:8087/oderq'  //后端返回的查询路由
+            ,methods:"get"
+            //,request: {
+            //    pageName: 'page' //页码的参数名称，默认：page
+            //    ,limitName: 'limit' //每页数据量的参数名，默认：limit
+            //}
+            ,where: {
+              oder: oder,
+              // account:account,
+                //cards:cards,
+              //// medicalHistory:medicalHistory
+            }
+            ,page: {
+                curr: 1
+            }
+        });
+      });
+          
 
-      
+
     
-              
-
-
+    
 });  //user的括号
 </script>
 </body>

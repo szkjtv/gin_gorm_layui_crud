@@ -40,14 +40,5 @@ func RegisterUser(c *gin.Context) {
 }
 
 func LoginCorim(c *gin.Context) {
-	db := mysql.Dbinit()
-	username := c.Param("acount")
-	password := c.Param("password")
-	claims := &JWTClaims{
-		UserID:      1,
-		Username:    {}Model.acount,
-		Password:    password,
-		FullName:    username,
-		Permissions: []string{},
-	}
+
 }
