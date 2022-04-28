@@ -1,0 +1,17 @@
+<!--multiUpload.html-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Multi-Upload</title>
+  </head>
+  <body>
+    <form action="/testuploFile" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+      <input type="text" name="name" id="names" multiple="multiple" />
+      <!-- <input type="text" name="test" id="test" multiple="multiple" /> -->
+      <input type="file" name="fs" id="fs" multiple="multiple" />
+      <input type="submit" name="upload" id="upload" value="" />
+    </form>
+  </body>
+</html>

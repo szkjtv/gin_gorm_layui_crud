@@ -4,7 +4,7 @@ import "github.com/jinzhu/gorm"
 
 type Commtidy struct {
 	gorm.Model //导出这个获取时间增删改字段
-	Id         int
+	// Id         int `gorm:"primary_key"`
 	//Params     string                `json:"params"`
 	//File       *multipart.FileHeader `json:"file"`
 	Spname   string //商品名称
@@ -13,4 +13,5 @@ type Commtidy struct {
 	Filepath string `json:"filepath"` //上传文件后保存的路径
 	Filename string `json:"filename"` //上传文件后重新生成的名称
 	//Createtime int64  `json:"createtime"`
+
 }

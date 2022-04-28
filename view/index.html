@@ -113,7 +113,7 @@
 
 
 <!--&lt;!&ndash; 表格 &ndash;&gt;-->
-<script type="text/javascript" src="/layui/layui.js"></script>
+<script type="text/javascript" src="../static/layui/layui.js"></script>
 <!-- <script type="text/javascript" src="../js/index.js"></script> -->
 <!-- <table class="layui-hide" id="test" lay-filter="test"></table> -->
 
@@ -133,9 +133,10 @@
 <table id="demo" lay-filter="deltest" sstyle="top:0;position:fixed;z-index: 999;" ></table> 
 </div>
 
+
     
 <!-- 上面是layui数据表格获取内容 -->
-     <script src="/layui/layui.js" charset="utf-8"></script>
+     <script src="../static/layui/layui.js" charset="utf-8"></script>
     <!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 --> 
    
     <script type="text/html" id="barOption">
@@ -295,14 +296,14 @@
           ,totalRow:true  //合计
         
           ,cols: [[ //数据库表头  edit:'text'单元格内编辑
-              //{type: 'checkbox', fixed: 'left',style:"border:0.5px solid #D3D3D3",style:"border:0.5px solid #D3D3D3" },
-              //{ type: 'checkbox', },
-              {field: 'ID',  title: 'ID',align:'center', width:50,  fixed: 'left',}
+              {type: 'radio',title:"选择", fixed: 'left',style:"border:0.5px solid #D3D3D3",style:"border:0.5px solid #D3D3D3" },
+              //{ type: 'radio', },
+              {field: 'ID',  title: 'ID',align:'center', width:50,  fixed: 'left',style:"border:0.5px solid #D3D3D3;text-align:left"}
               //,{field: 'name', title: '姓名', width:80,sort: true,align:'center',style:"border:0.5px solid #D3D3D3;font-size:6px;"}
               //,{field: 'mobile', title: '电话', width:104,sort: true,align:'center',style:"border:0.5px solid #D3D3D3;font-size:2px;"}
               ,{field: 'oder', title: '订单编号', edit:'text',width:200,align:'center',style:"border:0.5px solid #D3D3D3;text-align:left"}
               ,{field: 'address', title: '地址', edit:'text',width:500,align:'center',style:"border:0.5px solid #D3D3D3;text-align:left"}
-              ,{field: 'comcode', title: '商品编码',edit:'text', width:86,align:'center',style:"border:0.5px solid #D3D3D3;text-align:left"}
+              ,{field: 'comcode', title: '商品编码',edit:'text', width:100,align:'center',style:"border:0.5px solid #D3D3D3;text-align:left"}
               ,{field: 'courier', title: '快递',totalRowText:"合计:",width:100,align:'center',style:"border:0.5px solid #D3D3D3;text-align:left;"}
               ,{field: 'price', title: '售价',edit:'text',width:80,align:'left',totalRow:true,style:"border:0.5px solid #D3D3D3;" }
               ,{field: 'cost', title: '成本',edit:'text', width:80,align:'center',totalRow:true,style:"border:0.5px solid #D3D3D3;"}

@@ -20,6 +20,7 @@ func Dbinit() (db *gorm.DB) {
 	db.AutoMigrate(&model.IotCard{})
 	db.AutoMigrate(&model.RgisterUser{})
 	db.AutoMigrate(&model.Commtidy{})
+	db.AutoMigrate(&model.ImgTest{}) //测试用的
 	// db.AutoMigrate(&model.Article{})
 	return db
 

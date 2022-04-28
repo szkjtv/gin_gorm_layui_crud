@@ -4,22 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>商品编码成本</title>
-  
-  <!-- <link rel="stylesheet" href="/layui/css/layui.css" media="all">
-  <link rel="stylesheet" href="/layui/css/layui.css"> -->
-
   <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
-  <!-- <link rel="stylesheet" href="/layui/css/layui.css"> -->
   <script src="../static/layui/layui.js" charset="utf-8"></script>
-  
 <script type="text/javascript" src="../static/layui/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="../static/layui/jquery-3.5.1.js"></script>
  
 
   
-  <!-- <link rel="stylesheet" href="/layui/build/layui.css" media="all">
-  <link rel="stylesheet" href="/build/layui.css" media="all"> -->
-  <!-- <link rel="stylesheet" href="/layui/css/layui.css" tppabs="https://www.layui.site/layui/dist/css/layui.css"  media="all"> -->
 </head>
 <body>
 <div class="layui-layout layui-layout-admin "  >
@@ -74,7 +65,7 @@
 
     
 <!-- 搜索框的内容 -->
-<blockquote class="layui-elem-quote" style="height: 25px;">
+<blockquote class="layui-elem-quote" style="height: 30px;">
   <!--搜索维度  -->
    <div class="layui-form">
       <div class="layui-form-item">
@@ -116,7 +107,7 @@
 
     
 <!--&lt;!&ndash; 表格 &ndash;&gt;-->
-<script type="text/javascript" src="/layui/layui.js"></script>
+<script type="text/javascript" src="../static/layui/layui.js"></script>
 <!-- <script type="text/javascript" src="../js/index.js"></script> -->
 <!-- <table class="layui-hide" id="test" lay-filter="test"></table> -->
 
@@ -139,7 +130,7 @@
 
     
 <!-- 上面是layui数据表格获取内容 -->
-     <script src="/layui/layui.js" charset="utf-8"></script>
+     <script src="../static/layui/layui.js" charset="utf-8"></script>
     <!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 --> 
    
     <script type="text/html" id="barOption">
@@ -249,14 +240,14 @@
         //第一个实例
         table.render({
           elem: '#demo'
-          ,height: 600
+          ,height: 550
           //,id:'tableid'
           ,id:'demo' //这是定义数据表格重载刷新id
           ,toolbar: '#toolbarDemo'
           ,url: 'http://127.0.0.1:8087/quercomm' //数据接口
           //,id: 'dataCheck'
           ,page: true //开启分页
-          ,limit:10
+          ,limit:6
           //,limits: [5, 10, 20, 50, 200]
           ,skin: 'row'
           //,toolbar: 'default'//开启工具栏  复选框的 + 号 编辑 删除的图图标
@@ -304,24 +295,30 @@
               //,{field: 'name', title: '姓名', width:80,sort: true,align:'center',style:"border:0.5px solid #D3D3D3;font-size:6px;"}
               //,{field: 'mobile', title: '电话', width:104,sort: true,align:'center',style:"border:0.5px solid #D3D3D3;font-size:2px;"}
               ,{field: 'Spname', title: '商品名称',align:'center',style:"border:0.5px solid #D3D3D3;text-align:center;width:auto"}
-              ,{field: 'Spcode', title: '商品编码', with:100, align:'center',style:"border:0.5px solid #D3D3D3;text-align:center"}
-              ,{field: 'Spconst', title: '成本价格',align:'center',style:"border:0.5px solid #D3D3D3;text-align:center"}
+              ,{field: 'Spcode', title: '商品编码', width:130, align:'center',style:"border:0.5px solid #D3D3D3;text-align:center"}
+              ,{field: 'Spconst', title: '成本价格',width:90,align:'center',style:"border:0.5px solid #D3D3D3;text-align:center"}
              // ,{field: 'filepath', title: '商品图片',totalRowText:"合计:",width:100,templet: "#imgTpl",align:'center',style:"border:0.5px solid #D3D3D3;text-align:left;"}
               //,{field: 'Filepath', title: '商品图片',totalRowText:"合计:",width:300,templet:'<div><img src="{{.filepath}}"></div>'},
               
              //图片加载不出来要去后端看加载的静态文件路径                                                       //<div  οnclick="photograph(this)"> // name="filepath"
-             , {field: 'filepath', title: '图片', align: 'center',sort:false,templet:function (d) {return '<img οnclick="previewImg(this)"  name = "previewImg"  src='+d.filepath+'>'},
+             //, {field: 'filepath', title: '图片',width:100, align: 'center',sort:false,templet:function (d) {return '<img οnclick="previewImg(this)"  name = "previewImg"  src='+d.filepath+'>'},
+             // style:"border:0.5px solid #D3D3D3;text-align:center;cursor:pointer;"}
+             
+             , {field: 'filepath', title: '图片',width:100, align: 'center',sort:false,templet:function (d) {
+              //return '<img οnclick="previewImg(this)"  name = "previewImg"  src='+d.filepath+'>'
+              return '<img onclick="previewImg(this)"  src='+d.filepath+'  class="layui-upload-img" >'
+              },
               style:"border:0.5px solid #D3D3D3;text-align:center;cursor:pointer;"}
              
               
               //,{field: 'CreatedAt', title: '操作时间', width:180,sort: true,}   
-              //,{field: "CreatedAt", title: '添加时间',templet:function(d){
-               // if (d.CreatedAt &&  d.CreatedAt !== '' && d.CreatedAt !== null){
-                //  return layui.util.toDateString(d.CreatedAt, 'yyyy年MM月dd日 HH时:mm分:ss秒')
-               // }else{
+              ,{field: "CreatedAt", title: '添加时间',templet:function(d){
+                if (d.CreatedAt &&  d.CreatedAt !== '' && d.CreatedAt !== null){
+                  return layui.util.toDateString(d.CreatedAt, 'yyyy年MM月dd日 HH时:mm分:ss秒')
+                }else{
                   
-             //   }
-            //}, width:206,sort: true,align:'center',style:"border:0.5px solid #D3D3D3;"}  //这是创建时间
+               }
+            }, width:206,sort: true,align:'center',style:"border:0.5px solid #D3D3D3;"}  //这是创建时间
 
             ,{field: "UpdatedAt", title: '更新时间',templet:function(d){
               if (d.UpdatedAt &&  d.UpdatedAt !== '' && d.UpdatedAt !== null){
@@ -329,7 +326,7 @@
               }else{
                 
               }
-          }, width:206,sort: true,align:'center',style:"border:0.5px solid #D3D3D3;font-size:6px;"}  //这是更新时间
+          }, width:230,sort: true,align:'center',style:"border:0.5px solid #D3D3D3;"}  //这是更新时间
               ,{fixed: 'right',title:"操作", width: 118 ,height:50, align:'center', toolbar: '#barOption',style:"border:0.5px solid #D3D3D3"}
               //,{fixed: 'right',title:'添加数据', width: 400,height:100, align:'center', toolbar: '#adddata'}
               ]
@@ -337,20 +334,22 @@
           id:'tableid' //这是定义数据表格重载刷新ids
         });
 
-
+        
+      
+   
         //元素加载完成之后点击事件
-      $(document).on("click", ".layui-form img[name = 'previewImg']", function (e) {
-        console.log(e)
-        layer.open({
-          type: 1,
-          title: false,
-          closeBtn: 0,
-          shadeClose: true, //点击阴影关闭
-          area: ['50%', '50%'],
+     // $(document).on("click", ".layui-form img[name = 'previewImg']", function (e) {
+       // console.log(e)
+     /////   layer.open({
+       //   type: 1,
+        //  title: false,
+        //  closeBtn: 0,
+        //  shadeClose: true, //点击阴影关闭
+        //  area: ['50%', '50%'],
          // content: "<img width='100%' height='auto' src=" + $(this).context.previewImg + " />",
-          content: "<img width='100%' height='auto' src=" + $(this).content.filepath + " />",
-        });
-      }) 
+         // content: "<img width='100%' height='auto' src=" + $(this).content.filepath + " />",
+      //  });
+      //}) 
 
 
 
@@ -387,6 +386,30 @@
 
 
 });  //user的括号
+
+
+//这是点击图片（在img标签里设置cnlick 点击图片弹窗显示，函数要外在use的,外面  这是previewImg 按钮自定义的名称
+function previewImg(obj) {
+  var img = new Image(); 
+  img.src = obj.src;
+  var height = img.height + 50; // 原图片大小
+  var width = img.width; //原图片大小
+  var imgHtml = "<img src='" + obj.src + "'  />";  // width='400' height='400'
+  //弹出层
+  layer.open({ 
+    type: 1, 
+    shade: 0.4,  //背景阴影
+    offset: 'auto', 
+    area: [500 + 'px',550+'px'], // area: [width + 'px',height+'px'] //原图显示
+    shadeClose:true, //点击外围关闭弹窗
+    scrollbar: false,//不显示滚动条
+    title: "图片预览", //不显示标题 
+    content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响 
+    cancel: function () { 
+      //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 }); 
+    } 
+  }); 
+}
 </script>
 
 
@@ -398,9 +421,10 @@
     text-align:center;
     height: 50px;
     white-space: normal;
+    line-height:50px;  
   }
   .layui-table img{
-    max-width:70px;
+    max-width:50px;
   }
 </style>
   

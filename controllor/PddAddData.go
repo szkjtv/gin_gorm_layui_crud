@@ -113,13 +113,6 @@ func Updatepage(c *gin.Context) {
 func OderQ(c *gin.Context) {
 	db := mysql.Dbinit()
 	var pdddata []model.PddData
-	//id := c.Param("id")
-	// Name := c.PostForm("name")       //姓名
-	// Mobile := c.PostForm("mobile")   //电话
-	//Address := c.Query("address") //地址
-	//Number := c.Query("number") //出售的卡号信息
-	//Courier := c.Query("courier") //快递
-	// Weixin := c.PostForm("weixin")   //客户的微信
 	Oder := c.Query("oder") //备注
 	// 传一个参数完全匹配查询出来的
 	//db.Where("number =  ?", Number).Debug().Find(&iot)

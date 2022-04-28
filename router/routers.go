@@ -11,7 +11,8 @@ func Router() {
 
 	router.LoadHTMLGlob("view/*")
 	//router.Static("/imgagess", "./imgagess")
-	router.Static("/static", "./static")
+	router.Static("/static", "./static") //原来可以访问的
+	// router.Static("/static", "./static/*") //测试多文件
 
 	// 拼多多下单用户地址信息数据增删改查
 	router.GET("/", controllor.Index)
@@ -37,9 +38,9 @@ func Router() {
 	router.GET("/login", controllor.LoginPage)            //获取登录页面的路由
 	router.GET("/register", controllor.Register)          //获取注册页面的路由
 	router.POST("/registeruser", controllor.RegisterUser) //注册用户信息
-	router.GET("/queryadd", controllor.GetAddree)         //根据号码字段查询数据
-	router.GET("/addreeq", controllor.Addree)             //通过地址模糊查询数据
-	router.GET("/remarksq", controllor.Remarks)           //通过备注信息进行模糊搜索
+	//router.GET("/queryadd", controllor.GetAddree)         //根据号码字段查询数据
+	//router.GET("/addreeq", controllor.Addree)             //通过地址模糊查询数据
+	router.GET("/remarksq", controllor.Remarks) //通过备注信息进行模糊搜索
 
 	// 炊大皇商品数据增删改查
 	router.POST("/commodity", controllor.Commodity)        //上传单文件图片拉接口
@@ -51,6 +52,13 @@ func Router() {
 	router.GET("/delec/:id", controllor.DeleC)             //通过id来删除商品数据信息
 	router.POST("/upcomm/:id", controllor.UpComm)          //通过id来修改内容
 	router.GET("/getPagespname", controllor.GetPageSpname) //获取炊大皇的商品编辑页面
+
+	//测试多文件上传
+	router.GET("/GetUptestHtml", controllor.GetUptestHtml) //获取上传页面
+	router.POST("/testuploFile", controllor.TestUploFile)  //多文件上传
+	router.GET("/imgquery", controllor.ImgQuery)           //获取富文本编辑器页面
+	router.GET("/article", controllor.Article)             //查询页面
+	router.Any("/ueditor/controller", controllor.Action)   //抄别人的
 
 	router.Run(":8087")
 

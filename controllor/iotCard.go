@@ -70,7 +70,7 @@ func IotQuery(c *gin.Context) {
 	db.Find(&iot)
 	//c.HTML(200, "pddquery.html", pdd)
 	c.JSON(200, iot)
-	// defer db.Close()
+	defer db.Close()
 }
 
 // 获取添加数据的弹出层页面
@@ -95,43 +95,47 @@ func UpIotPage(c *gin.Context) {
 }
 
 // 根据号码字段来查询信息
-func GetAddree(c *gin.Context) {
-	db := mysql.Dbinit()
-	var iot []model.IotCard
-	Number := c.Query("number") //出售的卡号信息
-	// 传一个参数完全匹配查询出来的
-	//db.Where("number =  ?", Number).Debug().Find(&iot)
-	// 实际模糊搜索功能
-	db.Where("number LIKE  ?", Number+"%").Find(&iot)
-	// LIKE
-	// db.Where("name LIKE ?", "%jin%").Find(&users)
-	//db.Where(&model.IotCard{Address: Address, Number: Number, Courier: Courier, Weixin: Weixin, Remarks: Remarks}).Find(&iot)
-	c.JSON(200, iot)
-	//c.Redirect(http.StatusMovedPermanently, "/iotcard") //重定向
-}
+// func GetAddree(c *gin.Context) {
+// 	db := mysql.Dbinit()
+// 	var iot []model.IotCard
+// 	Number := c.Query("number") //出售的卡号信息
+// 	// 传一个参数完全匹配查询出来的
+// 	//db.Where("number =  ?", Number).Debug().Find(&iot)
+// 	// 实际模糊搜索功能
+// 	db.Where("number LIKE  ?", Number+"%").Find(&iot)
+// 	// LIKE
+// 	// db.Where("name LIKE ?", "%jin%").Find(&users)
+// 	//db.Where(&model.IotCard{Address: Address, Number: Number, Courier: Courier, Weixin: Weixin, Remarks: Remarks}).Find(&iot)
+// 	c.JSON(200, iot)
+//c.Redirect(http.StatusMovedPermanently, "/iotcard") //重定向
+// }
 
 // 通过地址模糊查询Get请求
-func Addree(c *gin.Context) {
-	db := mysql.Dbinit()
-	var iot []model.IotCard
-	Address := c.Query("address") //地址
-	// 实现模糊搜索功能
-	db.Where("address LIKE  ?", Address+"%").Find(&iot)
-	// LIKE
-	// db.Where("name LIKE ?", "%jin%").Find(&users)
-	c.JSON(200, iot)
-}
+// func Addree(c *gin.Context) {
+// 	db := mysql.Dbinit()
+// 	var iot []model.IotCard
+// 	Address := c.Query("address") //地址
+// 	// 实现模糊搜索功能
+// 	db.Where("address LIKE  ?", Address+"%").Find(&iot)
+// 	// LIKE
+// 	// db.Where("name LIKE ?", "%jin%").Find(&users)
+// 	c.JSON(200, iot)
+// }
 
 // 通过备注信息进行模糊搜索
 func Remarks(c *gin.Context) {
 	db := mysql.Dbinit()
 	var iot []model.IotCard
 	Remarks := c.Query("remarks") //备注
+	//Number := c.Query("number")   //备注
 	// 传一个参数完全匹配查询出来的
 	//db.Where("number =  ?", Number).Debug().Find(&iot)
 	// 实际模糊搜索功能
 	//Number := c.Query("number")
 	db.Where("remarks LIKE  ?", Remarks+"%").Find(&iot) //这个是可以查出来的
+	//db.Where("remarks LIKE  ?", Remarks+"%").Find(&iot) //这个是可以查出来的
+	// db.Table(Remarks).Find(&iot)
+	//db.Where("remarks LIKE  ?", Remarks+"%").Or("number LIKE  ?", Number+"%").Find(&iot)
 	c.JSON(200, iot)
 
 }

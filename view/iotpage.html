@@ -87,7 +87,7 @@
 
 </div >
 <!--&lt;!&ndash; 表格 &ndash;&gt;-->
-<script type="text/javascript" src="/layui/layui.js"></script>
+<script type="text/javascript" src="../static/layui/layui.js"></script>
 <!-- <script type="text/javascript" src="../js/index.js"></script> -->
 <!-- <table class="layui-hide" id="test" lay-filter="test"></table> -->
 
@@ -141,7 +141,7 @@
 <!-- 上面是layui数据表格获取内容 -->
 
 
-     <script src="/layui/layui.js" charset="utf-8"></script>
+     <script src="../static/layui/layui.js" charset="utf-8"></script>
     <!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 --> 
    
     <script type="text/html" id="barOption">
@@ -358,9 +358,10 @@
        
         //这是通用指定字段来搜索  号码字段来查询数据
           $("#search-btn").click(function(){
-            var number = $('#number').val()
+            //var number = $('#number').val()
+            var remarks = $('#remarks').val()
             //var name = $('#name').val()
-            //var cards = $('#cards').val()
+            //var number = $('#number').val()
             //var medicalHistory = $('#medicalHistory').val()
             table.reload('tableid', {
                 url: 'http://127.0.0.1:8087/queryadd'
@@ -370,7 +371,8 @@
                 //    ,limitName: 'limit' //每页数据量的参数名，默认：limit
                 //}
                 ,where: {
-                  number: number,
+                  remarks: remarks,
+                  //number:number,
                   // account:account,
                     //cards:cards,
                   //// medicalHistory:medicalHistory
@@ -410,7 +412,7 @@
         $("#search-btn").click(function(){
           var remarks = $('#remarks').val()
           //var name = $('#name').val()
-          //var cards = $('#cards').val()
+          //var number = $('#number').val()
           //var medicalHistory = $('#medicalHistory').val()
           table.reload('tableid', {
               url: 'http://127.0.0.1:8087/remarksq'
@@ -421,6 +423,7 @@
               //}
               ,where: {
                 remarks: remarks,
+                //number:number,
                 // account:account,
                   //cards:cards,
                 //// medicalHistory:medicalHistory

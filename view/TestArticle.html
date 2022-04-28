@@ -1,0 +1,27 @@
+<!--multiUpload.html-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>测试查询文章系统</title>
+  </head>
+  <body>
+
+    {{ range.}}
+    <textarea> {{ .Name}} </textarea>
+    <!-- <img src="{{.Name}}" > -->
+
+
+    <!-- <div id="app">
+        <p v-cloak>{{ .Name }}</p>
+        <p v-text="msg"></p>
+    </div>
+     -->
+    <div class="zuzhi" v-html="{{ .Name }}"></div>
+
+    {{end}}
+    </form>
+
+  </body>
+</html>
